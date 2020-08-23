@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
+import dbtest
 app = Flask(__name__)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root@localhost/postdb'
 
 db = SQLAlchemy(app)
@@ -26,12 +27,14 @@ def posts():
     if request.method == 'POST':
         post_title = request.form['title']
         post_content = request.form['content']
-        new_post = BlogPost(title=post_title, content=post_content)
-        db.session.add(new_post)
-        db.session.commit()
+        # new_post = BlogPost(title=post_title, content=post_content)
+        # db.session.add(new_post)
+        # db.session.commit()
+        dbtest.create(post_title, post_content, "john")
         return redirect('/posts')
     else:
-        myposts = BlogPost.query.all()
+        # myposts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
+        myposts = dbtest.getAll()
         return render_template('posts.html', posts=myposts)
         
 if __name__ == '__main__':
