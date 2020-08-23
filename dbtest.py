@@ -18,3 +18,6 @@ def create(title, content, author):
     date = datetime.utcnow()
     cursor.execute("INSERT INTO blog_post(title,content,author, created_at) VALUES(%s, %s, %s, %s)",(title, content, author, date))
     db.commit()
+
+def updatePost(id);
+    print("hello")
