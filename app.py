@@ -48,7 +48,6 @@ def onePost(id):
         # print(id)
         single_post = dbtest.getOnePost(id)
         print(single_post)
-        # return redirect('/posts')
         return render_template('update.html', post=single_post[0])
 
 @app.route('/posts/delete/<id>')
