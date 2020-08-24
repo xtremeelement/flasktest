@@ -18,6 +18,8 @@
         {% for post in posts %}
             <h4>{{post.title}}</h4>
             <p>{{post.content}}</p>
+            <a href="/posts/{{post.id}}">Update Post</a>
+            <a href="/posts/delete/{{post.id}}">Delete Post</a>
             {% if post.author %}
                 <p>{{post.author}}</p>
             {% else %}

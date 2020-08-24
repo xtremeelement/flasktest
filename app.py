@@ -36,6 +36,26 @@ def posts():
         # myposts = BlogPost.query.order_by(BlogPost.created_at.desc()).all()
         myposts = dbtest.getAll()
         return render_template('posts.html', posts=myposts)
-        
+
+@app.route('/posts/<id>', methods=['GET', 'POST'])
+def onePost(id):
+    if request.method == 'POST':
+        title = request.form['title']
+        content = request.form['content']
+        dbtest.updatePost(id, title, content)
+        return redirect('/posts')
+    else:
+        # print(id)
+        single_post = dbtest.getOnePost(id)
+        print(single_post)
+        # return redirect('/posts')
+        return render_template('update.html', post=single_post[0])
+
+@app.route('/posts/delete/<id>')
+def deletePost(id):
+    id = int(id)
+    dbtest.deletePost(id)
+    return redirect('/posts')
+
 if __name__ == '__main__':
     app.run(debug=True)

@@ -19,5 +19,19 @@ def create(title, content, author):
     cursor.execute("INSERT INTO blog_post(title,content,author, created_at) VALUES(%s, %s, %s, %s)",(title, content, author, date))
     db.commit()
 
-def updatePost(id);
+def updatePost(id):
     print("hello")
+
+def getOnePost(id):
+    id = int(id)
+    cursor.execute("SELECT * FROM blog_post WHERE id=%s",(id,))
+    result = cursor.fetchall()
+    return result
+
+def deletePost(id):
+    cursor.execute("DELETE FROM blog_post WHERE id=%s", (id,))
+    db.commit()
+
+def updatePost(id, title, content):
+    cursor.execute("UPDATE blog_post SET title=%s, content=%s WHERE id=%s",(title, content, id))
+    db.commit()
